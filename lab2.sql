@@ -209,6 +209,10 @@ INSERT INTO Estaciones(id_estacion,nombre,fecha_inauguracion,linea,color_estacio
 
 
 
+INSERT INTO reportadores(rut,nombres,apellidos,sueldo) 
+VALUES('18.020.677','Manuel','Alba','0');
+
+
 INSERT INTO codigos (id_codigo,descripcion) VALUES ('96','Un repentino corte de luz dejó a los trenes en un estado de caos total. La confusión se apoderó de todos, y la estación se sumió en el caos. La falta de energía dejó a los trenes pirilocos, causando retrasos y desconcierto entre los viajeros.');
 
 DELETE FROM Lineas WHERE Lineas.linea = '4';
