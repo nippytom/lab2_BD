@@ -223,10 +223,10 @@ INSERT INTO codigos (id_codigo,descripcion) VALUES ('96','Un repentino corte de 
 INSERT INTO reporte ( id_crea,fecha_hora, codigo, comentario) values ('18.020.677','2023/11/07 20:33:11','96','Un repentino corte de luz dejó a los trenes en un
 	estado de caos total. La confusión se apoderó de todos, y la estación se sumió en el caos. 
 	La falta de energía dejó a los trenes pirilocos, causando retrasos y desconcierto entre los viajeros.');
-DELETE FROM Lineas WHERE Lineas.linea = '4';
 
 DELETE FROM Estaciones WHERE Estaciones.linea = '4';
 
+DELETE FROM Lineas WHERE Lineas.linea = '4';
 
 
 SELECT Estaciones.nombre FROM (SELECT MAX(COUNT) FROM (SELECT COUNT(*) FROM reporte_estaciones) as t1)
