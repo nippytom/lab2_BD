@@ -1,6 +1,6 @@
--- Tomas Leon - 21367682-2
--- Thomas Muñoz - 20750450-5
--- Hugo Rojas - 21333863-3
+-- Tomas Leon - 21.367.682-2
+-- Thomas Muñoz - 20.750.450-5
+-- Hugo Rojas - 21.333.863-3
 
 CREATE TABLE Estaciones(
     id_estacion varchar(4) NOT NULL,
