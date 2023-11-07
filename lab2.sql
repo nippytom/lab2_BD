@@ -206,3 +206,8 @@ INSERT INTO Estaciones(id_estacion,nombre,fecha_inauguracion,linea,color_estacio
 ('608', 'Ñuñoa', '2017/11/02', '6', NULL),
 ('609', 'Inés de Suárez', '2017/11/02', '6', NULL),
 ('610', 'Los Leones', '2017/11/02', '6', NULL);
+
+
+SELECT Estaciones.nombre FROM (SELECT MAX(COUNT) FROM (SELECT COUNT(*) FROM reporte_estaciones) as t1)
+as t2 JOIN (SELECT id_estacion_afectada, COUNT(*) FROM reporte_estaciones GROUP BY id_estacion_afectada)
+as t3 ON t3.COUNT = t2.MAX JOIN Estaciones ON Estaciones.id_estacion = t3.id_estacion_afectada GROUP BY Estaciones.nombre;
