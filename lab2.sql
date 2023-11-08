@@ -224,6 +224,12 @@ INSERT INTO reporte ( id_crea,fecha_hora, codigo, comentario) values ('18.020.67
 	estado de caos total. La confusión se apoderó de todos, y la estación se sumió en el caos. 
 	La falta de energía dejó a los trenes pirilocos, causando retrasos y desconcierto entre los viajeros.');
 
+
+INSERT INTO reporte_estaciones (id_reporte, id_estacion_afectada, fecha_hora, id_crea)
+SELECT '3', generate_series, '2023-11-07 20:33:11', '19.933.118'
+FROM generate_series(101, 127);
+
+
 DELETE FROM Estaciones WHERE Estaciones.linea = '4';
 
 DELETE FROM Lineas WHERE Lineas.linea = '4';
