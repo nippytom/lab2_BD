@@ -16,10 +16,11 @@ AND EXTRACT(YEAR FROM fecha_venta) = 2020 GROUP BY codigo_producto) AS t1) AS t2
 AND EXTRACT(YEAR FROM fecha_venta) = 2020 GROUP BY codigo_producto) AS t3 ON t3.COUNT = t2.MAX JOIN productos ON productos.codigo = t3.codigo_producto GROUP BY productos.codigo, productos.nombre;
 
 --c) Cliente que nunca ha comprado
-
+SELECT codigo, rut, nombres, apellidos FROM clientes WHERE clientes.codigo NOT IN (SELECT codigo_cliente FROM ventas);
 
 --d) Productos que superen el precio medio de los productos
-
+SELECT codigo, nombre, precio FROM productos WHERE precio > (SELECT AVG(precio) FROM productos);
 
 --e) Clientes que hayan comprado productos que superen el precio medio de los productos y que producto compraron
-
+SELECT clientes.nombres, productos.nombre FROM clientes JOIN ventas ON ventas.codigo_cliente = clientes.codigo JOIN productos ON productos.codigo = ventas.codigo_producto
+WHERE precio > (SELECT AVG(precio) FROM productos) GROUP BY clientes.nombres, productos.nombre;
