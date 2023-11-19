@@ -5,10 +5,9 @@ PRODUCTOS: Codigo, Nombre, Precio
 */
 
 --a) Nombre del cliente que ha gastado menos dinero en compras
-SELECT clientes.nombres FROM (SELECT MIN(dinero_gastado) FROM (SELECT SUM(cantidad) * precio AS dinero_gastado FROM ventas JOIN productos ON productos.codigo = ventas.codigo_producto 
-GROUP BY codigo_cliente, productos.precio) AS t1) AS t2 JOIN (SELECT codigo_cliente, SUM(cantidad) * precio AS dinero_gastado FROM ventas JOIN productos 
-ON productos.codigo = ventas.codigo_producto GROUP BY codigo_cliente, productos.precio) AS t3 ON t3.dinero_gastado = t2.MIN JOIN clientes ON clientes.codigo = t3.codigo_cliente
-GROUP BY clientes.nombre;
+SELECT clientes.nombres, t2.MIN FROM (SELECT MIN(dinero_gastado) FROM (SELECT SUM(cantidad * precio) AS dinero_gastado FROM ventas JOIN productos ON productos.codigo = ventas.codigo_producto 
+GROUP BY codigo_cliente) AS t1) AS t2 JOIN (SELECT codigo_cliente, SUM(cantidad * precio) AS dinero_gastado FROM ventas JOIN productos ON productos.codigo = ventas.codigo_producto 
+GROUP BY codigo_cliente) AS t3 ON t3.dinero_gastado = t2.MIN JOIN clientes ON clientes.codigo = t3.codigo_cliente GROUP BY clientes.nombres, t2.MIN;
 
 --b) Codigo y nombre del producto mas vendido en febrero del 2020
 SELECT productos.codigo, productos.nombre FROM (SELECT MAX(COUNT) FROM (SELECT COUNT(*) FROM ventas WHERE fecha_venta BETWEEN '2020-02-01' AND '2020-02-29' GROUP BY codigo_producto)
