@@ -11,9 +11,9 @@ ON productos.codigo = ventas.codigo_producto GROUP BY codigo_cliente, productos.
 GROUP BY clientes.nombre;
 
 --b) Codigo y nombre del producto mas vendido en febrero del 2020
-SELECT productos.codigo, productos.nombre FROM (SELECT MAX(COUNT) FROM (SELECT COUNT(*) FROM ventas WHERE EXTRACT(MONTH FROM fecha_venta) = 2
-AND EXTRACT(YEAR FROM fecha_venta) = 2020 GROUP BY codigo_producto) AS t1) AS t2 JOIN (SELECT codigo_producto, COUNT(*) FROM ventas WHERE EXTRACT(MONTH FROM fecha_venta) = 2
-AND EXTRACT(YEAR FROM fecha_venta) = 2020 GROUP BY codigo_producto) AS t3 ON t3.COUNT = t2.MAX JOIN productos ON productos.codigo = t3.codigo_producto GROUP BY productos.codigo, productos.nombre;
+SELECT productos.codigo, productos.nombre FROM (SELECT MAX(COUNT) FROM (SELECT COUNT(*) FROM ventas WHERE fecha_venta BETWEEN '2020-02-01' AND '2020-02-29' GROUP BY codigo_producto)
+AS t1) AS t2 JOIN (SELECT codigo_producto, COUNT(*) FROM ventas WHERE fecha_venta BETWEEN '2020-02-01' AND '2020-02-29' GROUP BY codigo_producto) AS t3 ON t3.COUNT = t2.MAX
+JOIN productos ON productos.codigo = t3.codigo_producto GROUP BY productos.codigo, productos.nombre;
 
 --c) Cliente que nunca ha comprado
 SELECT codigo, rut, nombres, apellidos FROM clientes WHERE clientes.codigo NOT IN (SELECT codigo_cliente FROM ventas);
