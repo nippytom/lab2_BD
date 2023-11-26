@@ -16,8 +16,8 @@ GROUP BY codigo_cliente) AS t1) AS t2 JOIN (SELECT codigo_cliente, SUM(cantidad 
 GROUP BY codigo_cliente) AS t3 ON t3.dinero_gastado = t2.MIN JOIN clientes ON clientes.codigo = t3.codigo_cliente GROUP BY clientes.nombres, t2.MIN;
 
 --b) Codigo y nombre del producto mas vendido en febrero del 2020
-SELECT productos.codigo, productos.nombre FROM (SELECT MAX(COUNT) FROM (SELECT COUNT(*) FROM ventas WHERE fecha_venta BETWEEN '2020-02-01' AND '2020-02-29' GROUP BY codigo_producto)
-AS t1) AS t2 JOIN (SELECT codigo_producto, COUNT(*) FROM ventas WHERE fecha_venta BETWEEN '2020-02-01' AND '2020-02-29' GROUP BY codigo_producto) AS t3 ON t3.COUNT = t2.MAX
+SELECT productos.codigo, productos.nombre FROM (SELECT MAX(SUM) FROM (SELECT SUM(cantidad) FROM ventas WHERE fecha_venta BETWEEN '2020-02-01' AND '2020-02-29' GROUP BY codigo_producto)
+AS t1) AS t2 JOIN (SELECT codigo_producto, SUM(cantidad) FROM ventas WHERE fecha_venta BETWEEN '2020-02-01' AND '2020-02-29' GROUP BY codigo_producto) AS t3 ON t3.SUM = t2.MAX
 JOIN productos ON productos.codigo = t3.codigo_producto GROUP BY productos.codigo, productos.nombre;
 
 --c) Cliente que nunca ha comprado
