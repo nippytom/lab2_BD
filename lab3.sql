@@ -1,6 +1,3 @@
-
-
-
 /*
 CLIENTES: Codigo, Rut, Nombres, Apellidos
 VENTAS: Codigo_venta, Codigo_cliente, Codigo_producto, Cantidad, Fecha_venta
