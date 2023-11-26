@@ -5,10 +5,11 @@
 CLIENTES: Codigo, Rut, Nombres, Apellidos
 VENTAS: Codigo_venta, Codigo_cliente, Codigo_producto, Cantidad, Fecha_venta
 PRODUCTOS: Codigo, Nombre, Precio
-*/
+
 
 \c tienditacesar
 
+*/
 --a) Nombre del cliente que ha gastado menos dinero en compras
 SELECT clientes.nombres, t2.MIN FROM (SELECT MIN(dinero_gastado) FROM (SELECT SUM(cantidad * precio) AS dinero_gastado FROM ventas JOIN productos ON productos.codigo = ventas.codigo_producto 
 GROUP BY codigo_cliente) AS t1) AS t2 JOIN (SELECT codigo_cliente, SUM(cantidad * precio) AS dinero_gastado FROM ventas JOIN productos ON productos.codigo = ventas.codigo_producto 
